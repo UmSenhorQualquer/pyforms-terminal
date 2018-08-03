@@ -19,3 +19,12 @@ try:
 	conf += local_settings
 except:
 	pass
+
+
+if conf.PYFORMS_MODE == 'GUI':
+
+	from pyforms.gui.appmanager import start_app
+
+elif conf.PYFORMS_MODE == 'TERMINAL':
+
+	from pyforms_terminal.appmanager import start_app
