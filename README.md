@@ -116,4 +116,12 @@ if __name__ == '__main__':
     start_app(ComputerVisionAlgorithm)
 ```
 
+Result of runnning the application in the terminal:
+
+```bash
+
+$> python test.py terminal_mode
+```
+
+
 ![ScreenShot](docs/source/_static/imgs/terminal-example-computervisionalgorithm.png "Screen")
