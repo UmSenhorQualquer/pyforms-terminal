@@ -120,7 +120,7 @@ Result of runnning the application in the terminal:
 
 ```bash
 
-$> python test.py terminal_mode
+$> python test.py terminal_mode --help
 ```
 
 
