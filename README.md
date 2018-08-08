@@ -6,6 +6,9 @@ If you find this project useful, please, do not forget to ![star it](https://raw
 
 Pyforms **Terminal** is a software layer, part of the Pyforms main library. This layer implements the execution of a Pyforms application in the terminal.
 
+![Diagram](docs/source/_static/imgs/pyforms-layers-terminal.png "Screen")
+
+
 
 # Pyforms
 
@@ -14,13 +17,9 @@ Pyforms **Terminal** is a software layer, part of the Pyforms main library. This
 
 Pyforms is a Python 3 cross-enviroment framework that aims the boost the developement productivity. The library provides an API in Python to develop applications that can be executed in Windows GUI mode, Web mode, or in Terminal mode.
 
-[More @ReadTheDocs](https://pyforms.readthedocs.io)
+[More @ ![Diagram](docs/source/_static/imgs/rtd.png)](https://pyforms.readthedocs.io)
 
-![Diagram](docs/source/_static/imgs/pyforms-layers-terminal.png "Screen")
 
-Example of an application running in the Desktop, Web and Terminal enviroments:
-
-![Application-Example](docs/example.png?raw=true "Screen")
 
 ## Advantages
 * With a minimal API, interfaces are easily defined using a short Python code.
