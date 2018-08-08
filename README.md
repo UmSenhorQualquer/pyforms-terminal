@@ -68,12 +68,12 @@ class ComputerVisionAlgorithm(BaseWidget):
         super().__init__('Computer vision algorithm example')
 
         #Definition of the forms fields
-        self._videofile     = ControlFile('Video')
-        self._outputfile    = ControlText('Results output file')
-        self._threshold     = ControlSlider('Threshold', 114, 0,255)
-        self._blobsize      = ControlSlider('Minimum blob size', 100, 100,2000)
-        self._player        = ControlPlayer('Player')
-        self._runbutton     = ControlButton('Run')
+        self._videofile  = ControlFile('Video')
+        self._outputfile = ControlText('Results output file')
+        self._threshold  = ControlSlider('Threshold', 114, 0,255)
+        self._blobsize   = ControlSlider('Minimum blob size', 100, 100,2000)
+        self._player     = ControlPlayer('Player')
+        self._runbutton  = ControlButton('Run')
 
         #Define the function that will be called when a file is selected
         self._videofile.changed     = self.__videoFileSelectionEvent
