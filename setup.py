@@ -45,7 +45,7 @@ setup(
     packages=find_packages(),
 
 
-        classifiers=[
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         
         'Topic :: Software Development :: Build Tools',

@@ -30,10 +30,10 @@ Pyforms is a Python 3 cross-enviroment framework that aims the boost the develop
 * Turn the prototyping much easier and fast.
 * Due to its simplicity it has a low learning curve.
 
-## Examples of applications developed in Pyforms
-* [Python Video Annotator](https://github.com/UmSenhorQualquer/pythonVideoAnnotator)
-* [3D tracking analyser](https://github.com/UmSenhorQualquer/3D-tracking-analyser)
-* [PyBpod](http://pybpod.readthedocs.io)
+
+## Examples of applications developed in Pyforms Terminal
+* [D-Track](https://github.com/UmSenhorQualquer/d-track)
+
 
 ## Installation
 
