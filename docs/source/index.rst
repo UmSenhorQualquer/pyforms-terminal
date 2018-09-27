@@ -8,7 +8,7 @@ Pyforms Terminal documentation!
 
 **Pyforms Terminal** is Python 3 framework to allow pyforms applications to execute in terminal mode.
 
-The framework aims the boost the developement productivity by providing an API in Python to allow the execution of applications developed for GUI and Web mode in terminal mode.
+The framework aims the boost the development productivity by providing an API in Python to allow the execution of applications developed for GUI and Web mode in terminal mode.
 
 
 Source code
