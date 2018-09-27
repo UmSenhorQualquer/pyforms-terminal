@@ -54,6 +54,14 @@ Source code
 
    api-reference/index
 
+.. toctree::
+   :maxdepth: 4
+   :caption: More docs
+   
+   Pyforms <https://pyforms.readthedocs.io>
+   Pyforms-GUI <https://pyforms-gui.readthedocs.io>
+   Pyforms-TERMINAL <https://pyforms-terminal.readthedocs.io>
+
 Indices and tables
 ==================
 
