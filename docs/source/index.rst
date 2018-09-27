@@ -60,7 +60,7 @@ Source code
    
    Pyforms <https://pyforms.readthedocs.io>
    Pyforms-GUI <https://pyforms-gui.readthedocs.io>
-   Pyforms-TERMINAL <https://pyforms-terminal.readthedocs.io>
+   Pyforms-WEB <https://pyforms-web.readthedocs.io>
 
 Indices and tables
 ==================
