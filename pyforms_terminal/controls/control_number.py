@@ -2,11 +2,10 @@ from pyforms_terminal.controls.control_base import ControlBase
 
 class ControlNumber(ControlBase):
 
-	def __init__(self, label = "", default = 0, minimum = 0, maximum = 100):
-		self._min = minimum
-		self._max = maximum
-		
-		ControlBase.__init__(self, label, default)
+	def __init__(self, *args, **kwargs):
+		self._min = kwargs.get('minimum', 0)
+		self._max = kwargs.get('maximum', 100)
+		ControlBase.__init__(self, *args, **kwargs)
 
 
 	@property

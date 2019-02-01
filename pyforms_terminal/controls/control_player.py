@@ -3,7 +3,6 @@ from pyforms_terminal.utils.tools import groupImage
 import numpy, types
 
 
-import numpy as np 
 try:
     from StringIO import StringIO as BufferClass
 except ImportError:
@@ -67,6 +66,9 @@ class ControlPlayer(ControlBase):
     def value(self): 
         result = {'min': self._min, 'max': self._max, 'position': self.video_index, 'frame': '', 'filename': self._filename }
         capture = self._value
+
+        if capture is None:
+            return None
 
         _, image = capture.read()
         if isinstance(image, numpy.ndarray):

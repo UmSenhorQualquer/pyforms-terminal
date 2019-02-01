@@ -29,9 +29,9 @@ class BaseWidget(object):
 
     def __init__(self, *args, **kwargs):
         self._parser = argparse.ArgumentParser()
-        self._controlsPrefix    = ''
-        self._title             = kwargs.get('title', args[0] if len(args)>0 else '')
-        self.stop               = False
+        self._controlsPrefix = ''
+        self._title          = kwargs.get('title', args[0] if len(args)>0 else '')
+        self.stop            = False
 
         self._conf = kwargs.get('load', None)
 
@@ -50,7 +50,7 @@ class BaseWidget(object):
                     ControlCombo,ControlCheckBox, ControlDir, ControlNumber, ControlBoundingSlider
                 ) 
             ):
-                self._parser.add_argument("--%s" % name, help=var.label)
+                self._parser.add_argument("--%s" % name, help=var.label, default=var.value)
 
         if parse:
             self._parser.add_argument('terminal_mode', type=str, default='terminal_mode', help='Flag to run pyforms in terminal mode')
@@ -84,10 +84,12 @@ class BaseWidget(object):
     def __parse_terminal_parameters(self):
         for fieldname, var in self.controls.items():
             name = var._name
-            if self._args.__dict__.get(name, None):
+            args = self._args.__dict__
+            if name in args:
+
+                value = args[name]
 
                 if isinstance(var, ControlFile):
-                    value = self._args.__dict__[name]
                     if value!=None and (value.startswith('http://') or value.startswith('https://')):
                         local_filename = value.split('/')[-1]
                         outputFileName = os.path.join('input', local_filename)
@@ -97,29 +99,33 @@ class BaseWidget(object):
                         var.value = value
 
                 if isinstance(var, ControlDir):
-                    value = self._args.__dict__[name]
                     var.value = value
+
                 elif isinstance(var,  (ControlText, ControlCombo)):
-                    var.value = self._args.__dict__[name]
+                    var.value = value
+
                 elif isinstance(var, ControlCheckBox):
-                    var.value = self._args.__dict__[name]=='True'
+                    var.value = value=='True' if value is not None and isinstance(value, str) else value
+
                 elif isinstance(var, (ControlSlider, ControlNumber) ):
-                    var.value = int(self._args.__dict__[name])
+                    var.value = float(value) if value is not None and isinstance(value, (str, int) ) else value
+
                 elif isinstance(var, ControlBoundingSlider):
-                    var.value = eval(self._args.__dict__[name])
+                    var.value = eval(value) if isinstance(value, str) and value else value
 
         if self._args.load:
-            print('\n--------- LOADING CONFIG ------------------')
+            logger.debug('--------- LOADING CONFIG ---------')
             with open(self._args.load) as infile:
                 data = json.load(infile)
                 self.load_form(data, os.path.dirname(self._args.load))
-            print('--------- END LOADING CONFIG --------------\n')
-        elif self._conf is not None:
-            print('\n--------- LOADING DEFAULT CONFIG ------------------')
-            self.load_form(self._conf, '.')
-            print('--------- END LOADING DEFAULT CONFIG --------------\n')
+            logger.debug('--------- END LOADING CONFIG ---------')
 
-            
+        elif self._conf is not None:
+
+            logger.debug('--------- LOADING DEFAULT CONFI ---------')
+            self.load_form(self._conf, '.')
+            logger.debug('--------- END LOADING DEFAULT CONFIG ---------')
+
             
     def __execute_events(self):
         for function in self._args.__dict__.get("exec{0}".format(self._controlsPrefix), []).split('|'):

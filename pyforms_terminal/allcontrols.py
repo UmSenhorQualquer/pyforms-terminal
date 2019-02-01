@@ -10,6 +10,7 @@ from .controls.control_file import ControlFile
 from .controls.control_image import ControlImage
 from .controls.control_label import ControlLabel
 from .controls.control_list import ControlList
+from .controls.control_matplotlib import ControlMatplotlib
 from .controls.control_number import ControlNumber
 from .controls.control_player import ControlPlayer
 from .controls.control_progress import ControlProgress
