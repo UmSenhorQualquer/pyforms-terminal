@@ -1,7 +1,7 @@
 from pyforms_terminal.controls.control_base import ControlBase
-from pyforms_terminal.utils.tools import groupImage
-import numpy, types
+import types, logging
 
+logger = logging.getLogger(__name__)
 
 try:
     from StringIO import StringIO as BufferClass
@@ -12,19 +12,19 @@ except ImportError:
 try:
     import cv2
 except:
-    print( "cv2 not present. ControlPlayer not working")
+    logger.info( "cv2 not present. ControlPlayer not working")
 
 
 try:
     from PIL import Image
 except:
-    print( "PIL not present. ControlPlayer not working")
+    logger.info( "PIL not present. ControlPlayer not working")
 
 
 try:
    import base64
 except:
-    print( "base64 not present. ControlPlayer not working")
+    logger.info( "base64 not present. ControlPlayer not working")
 
 
 
@@ -64,29 +64,7 @@ class ControlPlayer(ControlBase):
     
     @property
     def value(self): 
-        result = {'min': self._min, 'max': self._max, 'position': self.video_index, 'frame': '', 'filename': self._filename }
-        capture = self._value
-
-        if capture is None:
-            return None
-
-        _, image = capture.read()
-        if isinstance(image, numpy.ndarray):
-            image = self.process_frame_event(image)
-
-            if isinstance(image, list) or isinstance(image, tuple):
-                image = groupImage(image, True)
-            
-
-            if len(image.shape)>2: image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
-            image = Image.fromarray(image)
-            buff = BufferClass()
-            image.save(buff, format="PNG")
-            content = buff.getvalue()
-            buff.close()
-            result['frame'] = base64.b64encode(content)
-
-        return result
+        return self._value
 
     @value.setter
     def value(self, value):

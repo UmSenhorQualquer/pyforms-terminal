@@ -1,4 +1,4 @@
-import os, pickle,uuid
+import uuid
 
 
 class ControlBase(object):
@@ -12,6 +12,7 @@ class ControlBase(object):
         self._value = kwargs.get('default', None)
         self._parent = 1
         self._label = kwargs.get('label', args[0] if len(args)>0 else '')
+        self.changed_event = kwargs.get('changed_event', self.changed_event)
 
     def init_form(self): pass
 
@@ -58,7 +59,8 @@ class ControlBase(object):
     def value(self, value):
         oldvalue = self._value
         self._value = value
-        if oldvalue!=value: self.changed_event()
+        if oldvalue!=value:
+            self.changed_event()
 
     ############################################################################
 

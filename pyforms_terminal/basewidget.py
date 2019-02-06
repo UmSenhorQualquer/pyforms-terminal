@@ -75,10 +75,12 @@ class BaseWidget(object):
             for name in self.load_order:
                 param = allparams[name]
                 if name in data:
+                    logger.debug("[%30s]: [%s]", param.label, data[name])
                     param.load_form(data[name])
         else:
             for name, param in allparams.items():
                 if name in data:
+                    logger.debug("[%30s]: [%s]", param.label, data[name])
                     param.load_form(data[name])
 
 
@@ -87,6 +89,7 @@ class BaseWidget(object):
             name = var._name
             args = self._args.__dict__
             if name in args:
+
 
                 value = args[name]
 
