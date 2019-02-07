@@ -56,7 +56,7 @@ class ControlList(ControlBase):
             self.value = rows
 
     def __add__(self, other):
-        self._value.append(val)
+        self._value.append(other)
         return self
         """
         row_index = self.tableWidget.rowCount()
