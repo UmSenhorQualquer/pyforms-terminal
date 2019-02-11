@@ -6,6 +6,7 @@ from pyforms_terminal.controls.control_checkbox import ControlCheckBox
 from pyforms_terminal.controls.control_dir import ControlDir
 from pyforms_terminal.controls.control_base import ControlBase
 from pyforms_terminal.controls.control_number import ControlNumber
+from pyforms_terminal.controls.control_list import ControlList
 from pyforms_terminal.controls.control_boundingslider import ControlBoundingSlider
 
 
@@ -47,7 +48,7 @@ class BaseWidget(object):
         for fieldname, var in self.controls.items():
             name = var._name
             if isinstance(var, (
-                    ControlFile, ControlSlider,   ControlText, 
+                    ControlFile, ControlSlider,   ControlText, ControlList,
                     ControlCombo,ControlCheckBox, ControlDir, ControlNumber, ControlBoundingSlider
                 ) 
             ):
@@ -104,6 +105,9 @@ class BaseWidget(object):
 
                 if isinstance(var, ControlDir):
                     var.value = value
+
+                elif isinstance(var, ControlList):
+                    var.value = eval(value)
 
                 elif isinstance(var,  (ControlText, ControlCombo)):
                     var.value = value

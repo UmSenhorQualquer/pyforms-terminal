@@ -5,7 +5,6 @@
 
 """
 import logging
-from pyforms_terminal.basewidget import BaseWidget
 from pyforms_terminal.controls.control_base import ControlBase
 
 
@@ -20,78 +19,24 @@ class ControlList(ControlBase):
         if 'default' not in kwargs: kwargs['default'] = []
         super(ControlList, self).__init__(*args, **kwargs)
 
-
     def clear(self, headers=False):
         pass
 
     def save_form(self, data, path=None):
-        if self.value:
-            rows = []
-            for row in range(self.rows_count):
-                columns = []
-                for column in range(self.columns_count):
-                    v = self.get_value(column, row)
-                    if isinstance(v, BaseWidget):
-                        columns.append(v.save({}))
-                    else:
-                        columns.append(str(v))
-                rows.append(columns)
-            data['value'] = rows
+        data['value'] = self.value
         return data
 
     def load_form(self, data, path=None):
-        rows = data.get('value')
-        
-        if self.value is not None and rows is not None:
-            for row_index in range(len(self.value)):
-                for column_index in range(len(self.value[row_index])):
-                    v = self.get_value(column_index, row_index)
-
-                    if isinstance(v, BaseWidget):
-                        v.load_form(rows[row_index][column_index], path)
-                    else:
-                        self.value[row_index] = list(self.value[row_index])
-                        self.value[row_index][column_index] = rows[row_index][column_index]
-        elif rows is not None:
-            self.value = rows
+        self.value = data.get('value', [])
 
     def __add__(self, other):
-        self._value.append(other)
+        self.value.append(other)
         return self
-        """
-        row_index = self.tableWidget.rowCount()
 
-        self.tableWidget.insertRow(row_index)
-
-        #increase the number of columns if necessary ####
-        if self.tableWidget.currentColumn() < len(other):
-            self.tableWidget.setColumnCount(len(other))
-        #################################################
-
-        for column, e in enumerate(other): self.set_value(column, row_index, e)
-
-        self.tableWidget.resizeColumnsToContents()
-
-        # auto scroll the list to the new inserted item ##################
-        if self.autoscroll:
-            self.tableWidget.scrollToItem( self.get_cell(0,row_index) )
-        ##################################################################
-        return self
-        """
 
     def __sub__(self, other):
-        self._value.remove(other)
+        self.value.remove(other)
         return self
-        """
-        if isinstance(other, int):
-            if other < 0:
-                indexToRemove = self.tableWidget.currentRow()
-            else:
-                indexToRemove = other
-
-            self.tableWidget.removeRow(indexToRemove)
-        return self
-        """
 
     def set_value(self, column, row, value):
         self.value[row][column] = value
@@ -172,14 +117,14 @@ class ControlList(ControlBase):
 
     @property
     def rows_count(self):
-        return 0
+        return len(self.value) if self.value else 0
 
     @property
     def columns_count(self):
-        return 0
+        return len(self.value[0]) if self.rows_count>0 else 0
 
     def __len__(self):
-        return 0
+        return len(self.value)
 
    
     # TODO: implement += on self.value? I want to add a list of tuples to
