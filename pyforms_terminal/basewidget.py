@@ -107,8 +107,10 @@ class BaseWidget(object):
                     var.value = value
 
                 elif isinstance(var, ControlList):
-                    var.value = eval(value)
-
+                    if value is not None:
+                        var.value = eval(value)
+                    else:
+                        var.value = None
                 elif isinstance(var,  (ControlText, ControlCombo)):
                     var.value = value
 

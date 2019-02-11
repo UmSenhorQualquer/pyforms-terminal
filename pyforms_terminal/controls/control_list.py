@@ -16,7 +16,7 @@ class ControlList(ControlBase):
         It allows to implement a list view
     """
     def __init__(self, *args, **kwargs):
-        if 'default' not in kwargs: kwargs['default'] = []
+        if 'default' not in kwargs: kwargs['default'] = None
         super(ControlList, self).__init__(*args, **kwargs)
 
     def clear(self, headers=False):
