@@ -210,6 +210,20 @@ class BaseWidget(object):
             raise e
 
 
+
+    def message(self, msg, title=None, msg_type=None):
+        print('*****', title.upper(), '*****')
+        print(msg)
+
+    def success(self,   msg, title=None):   self.message(msg, title, msg_type='success')
+    def info(self,      msg, title=None):   self.message(msg, title, msg_type='info')
+    def warning(self,   msg, title=None):   self.message(msg, title, msg_type='warning');
+    def alert(self,     msg, title=None):   self.message(msg, title, msg_type='error')
+    def critical(self,  msg, title=None):   self.message(msg, title, msg_type='error')
+    def about(self,     msg, title=None):   self.message(msg, title, msg_type='about')
+    def aboutQt(self,   msg, title=None):   self.message(msg, title, msg_type='aboutQt')
+
+
     def executeCommand(self, cmd, cwd=None, env=None):
         if cwd!=None: 
             currentdirectory = os.getcwd()
