@@ -124,7 +124,7 @@ class ControlList(ControlBase):
         return len(self.value[0]) if self.rows_count>0 else 0
 
     def __len__(self):
-        return len(self.value)
+        return len(self.value) if self.value is not None else 0
 
    
     # TODO: implement += on self.value? I want to add a list of tuples to
