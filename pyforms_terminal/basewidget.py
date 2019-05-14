@@ -86,6 +86,7 @@ class BaseWidget(object):
 
     def __parse_terminal_parameters(self):
 
+        logger.debug('--------- LOADING TERMINAL PARAMS ---------')
         for fieldname, var in self.controls.items():
             name = var._name
             args = self._args.__dict__
@@ -122,7 +123,9 @@ class BaseWidget(object):
                 elif isinstance(var, ControlBoundingSlider):
                     var.value = eval(value) if isinstance(value, str) and value else value
 
+                logger.debug("[%30s]: [%s]", var.label, var.value)
 
+        logger.debug('--------- END LOADING TERMINAL PARAMS ---------')
 
         if self._args.load:
             logger.debug('--------- LOADING CONFIG JSON ---------')
@@ -138,7 +141,10 @@ class BaseWidget(object):
             self.load_form(self._conf, '.')
             logger.debug('--------- END LOADING DEFAULT CONFIG ---------')
 
-
+        logger.debug('--------- FIELDS FINAL VALUES ---------')
+        for fieldname, var in self.controls.items():
+            logger.debug("[%30s]: [%s]", fieldname, var.value)
+        logger.debug('--------- END FIELDS FINAL VALUES ---------')
                     
             
     def __execute_events(self):
