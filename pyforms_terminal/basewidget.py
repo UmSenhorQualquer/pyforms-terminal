@@ -44,7 +44,6 @@ class BaseWidget(object):
     def set_margin(self, margin):pass
 
     def init_form(self, parse=True):
-        result = {}
         for fieldname, var in self.controls.items():
             name = var._name
             if isinstance(var, (
@@ -87,25 +86,11 @@ class BaseWidget(object):
 
     def __parse_terminal_parameters(self):
 
-        if self._args.load:
-            logger.debug('--------- LOADING CONFIG ---------')
-            with open(self._args.load) as infile:
-                data = json.load(infile)
-                self.load_form(data, os.path.dirname(self._args.load))
-            logger.debug('--------- END LOADING CONFIG ---------')
-
-        elif self._conf is not None:
-
-            logger.debug('--------- LOADING DEFAULT CONFI ---------')
-            self.load_form(self._conf, '.')
-            logger.debug('--------- END LOADING DEFAULT CONFIG ---------')
-
         for fieldname, var in self.controls.items():
             name = var._name
             args = self._args.__dict__
+
             if name in args:
-
-
                 value = args[name]
 
                 if isinstance(var, ControlFile):
@@ -136,6 +121,23 @@ class BaseWidget(object):
 
                 elif isinstance(var, ControlBoundingSlider):
                     var.value = eval(value) if isinstance(value, str) and value else value
+
+
+
+        if self._args.load:
+            logger.debug('--------- LOADING CONFIG JSON ---------')
+            with open(self._args.load) as infile:
+                data = json.load(infile)
+                self.load_form(data, os.path.dirname(self._args.load))
+            logger.debug('--------- END LOADING CONFIG JSON ---------')
+
+        elif self._conf is not None:
+
+            logger.debug('--------- LOADING DEFAULT CONFIG ---------')
+            data = self._conf
+            self.load_form(self._conf, '.')
+            logger.debug('--------- END LOADING DEFAULT CONFIG ---------')
+
 
                     
             
